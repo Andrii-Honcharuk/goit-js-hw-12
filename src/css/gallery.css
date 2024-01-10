@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 16px;
+  line-height: 1.5;
+  color: #212121;
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+
+.user-list, 
+.gallery {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  max-width: 1440px;
+}
+
+.user-list li:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.img-gallery-item {
+  width: 360px;
+  height: 200px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
