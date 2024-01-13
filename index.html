@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home work 11</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.css"
+      integrity="sha512-gA2Bvu0/hw4oj0Lp8ZHjK+o3S4BE5m8d/wNVy6ktKLhHKPpWLQwv9ixzuWirWOakoJqlBdePq2NhoCaUOQ5npQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-c145bea9.js">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-fd638ea2.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-c7d4c93d.css">
+  </head>
+  <body>
+    <form class="form-inline search-form">
+      <input
+        type="text"
+        class="form-control"
+        name="query"
+        placeholder="Search images..."
+      />
+
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <div class="container">
+      <ul class="gallery"></ul>
+      <p class="end-text is-hidden">We're sorry, but you've reached the end of search results.</p>
+    </div>
+    <button class="load-more-btn is-hidden">Load more</button>
+    <div class="loader" style="display: none"></div>
+    
+  </body>
+</html>
+
