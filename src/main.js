@@ -84,13 +84,16 @@ function smoothScrollBy(distance) {
 
 // press button Search
 searchForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  currentPage = 1;
-  query = event.currentTarget.elements.query.value.trim();
-  galleryList.innerHTML = "";
-  loader.style.display = "block";
-  fetchImages()
-  .then(data => {
+  try {
+    event.preventDefault();
+    currentPage = 1;
+    query = event.currentTarget.elements.query.value.trim();
+    galleryList.innerHTML = "";
+    loadAllText.classList.add("is-hidden");
+    loader.style.display = "block";
+  
+    const data = await fetchImages()
+    
     // якщо пошук не видає результатів: видалити текст і кноаку ЛоадМоре + помилка
     if (data.totalHits === 0) {
       loadMoreBtn.classList.add("is-hidden")
@@ -102,17 +105,19 @@ searchForm.addEventListener("submit", async (event) => {
       renderImages(galleryList, data)
       loadMoreBtn.classList.remove("is-hidden");
       loadAllText.classList.add("is-hidden");
+
       //Якщо результат відразу менший за місткість сторінки 40
       if (currentPage >= Math.ceil(totalResult / perPage)) {
         loadMoreBtn.classList.add("is-hidden");
         loadAllText.classList.remove("is-hidden");
       }
-      }
-  })
-  .catch((error) => viewError())
-  .finally(() => {loader.style.display = "none";
-  console.log("All: " + totalResult);
-  });
+    }
+  } catch (error) {
+    viewError();
+  } finally {
+  loader.style.display = "none";
+  // console.log("All: " + totalResult);
+  }
 });
 
 
@@ -121,27 +126,25 @@ loadMoreBtn.addEventListener("click", async () => {
   try {
     currentPage += 1;
     loader.style.display = "block";
-    fetchImages()
-    .then(data => {
-      renderImages(galleryList, data)
-      
-      const cardHeight = getCardHeight();
-      smoothScrollBy(cardHeight * 2.2);
-    }
+    loadMoreBtn.classList.add("is-hidden");
+    const data = await fetchImages();
 
-    )
-    .finally(() => {
-      loader.style.display = "none";
-      console.log("All: " + totalResult);
-    });
+    renderImages(galleryList, data);
+    alert(`Знайдено результатів ${totalResult}`);
+
+    const cardHeight = getCardHeight();
+    smoothScrollBy(cardHeight * 2.2);
+
     if (currentPage >= Math.ceil(totalResult / perPage)) {
-      loadMoreBtn.classList.add("is-hidden");
       loadAllText.classList.remove("is-hidden");
-    }
+    } else loadMoreBtn.classList.remove("is-hidden");
   } catch (error) {
     viewError();
+  } finally {
+    loader.style.display = "none";
   }
-})
+});
+
 
 
 
