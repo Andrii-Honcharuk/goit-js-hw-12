@@ -116,7 +116,6 @@ searchForm.addEventListener("submit", async (event) => {
     viewError();
   } finally {
   loader.style.display = "none";
-  // console.log("All: " + totalResult);
   }
 });
 
@@ -130,7 +129,6 @@ loadMoreBtn.addEventListener("click", async () => {
     const data = await fetchImages();
 
     renderImages(galleryList, data);
-    alert(`Знайдено результатів ${totalResult}`);
 
     const cardHeight = getCardHeight();
     smoothScrollBy(cardHeight * 2.2);
@@ -144,8 +142,6 @@ loadMoreBtn.addEventListener("click", async () => {
     loader.style.display = "none";
   }
 });
-
-
 
 
 function viewError() {
