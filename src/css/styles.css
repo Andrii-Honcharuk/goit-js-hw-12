@@ -50,8 +50,8 @@
   padding-bottom: 8px;
 }
 .btn {
-  margin-left: 8px;
-  color: #FFF;
+margin-left: 8px;
+color: #FFF;
 font-family: Montserrat;
 font-size: 16px;
 font-style: normal;
@@ -81,3 +81,42 @@ border: initial;
 .info-img {
   display: none;
 }
+
+.load-more-btn {
+  margin: 32px auto 32px auto;
+  display: block;
+/* margin-top: 20px;
+margin-left: auto;
+margin-right: auto; */
+color: #FFF;
+font-family: Montserrat;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 150% */
+letter-spacing: 0.64px;
+
+border-radius: 8px;
+background: #4E75FF;
+
+
+padding: 8px 16px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border: initial;
+}
+
+ 
+
+.end-text{
+  display: block;
+  text-align: center;  
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+  .is-hidden {
+    /* background-color: red; */
+    display: none;
+  }
