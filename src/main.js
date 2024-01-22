@@ -31,7 +31,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 
 // get images from Api
-async function fetchImages() {
+async function fetchImages(query, currentPage, perPage) {
   const params = {
     key: '41612762-752dc9341b43071862b7b3b8c',
     q: query,
@@ -42,6 +42,9 @@ async function fetchImages() {
     per_page: perPage,
   }
   url.search = new URLSearchParams(params);
+  
+  // console.log(url.search);
+  
   try {
     const response = await axios.get(url);
     return response.data;
@@ -50,9 +53,18 @@ async function fetchImages() {
   }
 }
 
+
+
 // rendering gallery
 function renderImages(galleryList, imgs) {
-  const markup = imgs.hits.map((img) => {
+  console.log(imgs);
+  console.log(imgs.hits);
+  console.log(imgs.total);
+  
+  const markup = imgs
+    .hits
+    .map(
+      img => {
     return `<li class="img-gallery-item"><a class="gallery-link" href="${img.largeImageURL}"><img class="gallery-image" src="${img.webformatURL}" alt="${img.tags}" width="${img.webformatWidth}"></a>
         <div class="info-img">
           <p>Likes<span>${img.likes}</span></p>
@@ -86,13 +98,13 @@ function smoothScrollBy(distance) {
 searchForm.addEventListener("submit", async (event) => {
   try {
     event.preventDefault();
-    currentPage = 1;
+    // currentPage = 1;
     query = event.currentTarget.elements.query.value.trim();
     galleryList.innerHTML = "";
     loadAllText.classList.add("is-hidden");
     loader.style.display = "block";
   
-    const data = await fetchImages()
+    const data = await fetchImages(query, currentPage = 1, perPage)
     
     // якщо пошук не видає результатів: видалити текст і кноаку ЛоадМоре + помилка
     if (data.totalHits === 0) {
@@ -112,13 +124,18 @@ searchForm.addEventListener("submit", async (event) => {
         loadAllText.classList.remove("is-hidden");
       }
     }
-  } catch (error) {
+    } catch (error) {
     viewError();
   } finally {
   loader.style.display = "none";
   }
 });
 
+searchForm.addEventListener("mousedown", function (event) {
+  if (event.target.classList.value === 'form-control' && event.target.value !== "")  {
+    event.target.value=""
+  }
+});
 
 
 loadMoreBtn.addEventListener("click", async () => {
@@ -126,7 +143,7 @@ loadMoreBtn.addEventListener("click", async () => {
     currentPage += 1;
     loader.style.display = "block";
     loadMoreBtn.classList.add("is-hidden");
-    const data = await fetchImages();
+    const data = await fetchImages(query, currentPage, perPage);
 
     renderImages(galleryList, data);
 
